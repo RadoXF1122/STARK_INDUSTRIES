@@ -12,16 +12,16 @@ jobs:
       - name: Pobierz kod projektu
         uses: actions/checkout@v5
 
-      - name: Zainstaluj Node.js v24
+      - name: Zainstaluj nowoczesny Node.js v24
         uses: actions/setup-node@v5
         with:
           node-version: 24
 
-      - name: Konfiguracja Javy v17
+      - name: Konfiguracja nowoczesnej Javy v21 (Wymagana przez wtyczki)
         uses: actions/setup-java@v5
         with:
           distribution: 'zulu'
-          java-version: '17'
+          java-version: '21'
 
       - name: Budowanie bazy projektu
         run: |
