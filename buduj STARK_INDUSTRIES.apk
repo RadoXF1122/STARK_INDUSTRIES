@@ -1,1 +1,40 @@
-.github/workflows/apk.yml
+name: Zbuduj STARK_INDUSTRIES.apk
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pobierz kod
+        uses: actions/checkout@v4
+
+      - name: Zainstaluj Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Konfiguracja Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Instalacja zależności
+        run: |
+          npm install
+          npm install @capacitor/core @capacitor/android
+          npx cap init STARK_INDUSTRIES com.stark.edith --web-dir=dist || true
+          npx cap add android || true
+
+      - name: Budowanie projektu i APK
+        run: |
+          npm run build || mkdir dist
+          npx cap sync || true
+          cd android && ./gradlew assembleDebug
+
+      - name: Wypluj gotowy plik APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: STARK_INDUSTRIES
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+
