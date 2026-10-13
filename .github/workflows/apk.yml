@@ -19,25 +19,19 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
-      - name: Instalacja Capacitora i przygotowanie dist
+      - name: Wymuszona instalacja silnika i Capacitora
         run: |
-          npm install
-          npm install @capacitor/core @capacitor/android @capacitor/cli
+          npm install --legacy-peer-deps || npm install
+          npm install @capacitor/core @capacitor/android @capacitor/cli --save-dev
           mkdir -p dist
           echo '<html><body>Stark Industries Engine 2026</body></html>' > dist/index.html
           npx cap init STARK_INDUSTRIES com.stark.edith --web-dir=dist --confirm || true
           npx cap add android || true
 
-      - name: Spawanie oficjalnego pliku APK
+      - name: Budowanie i spawanie struktury Android
         run: |
           npx cap sync android || true
-          if [ -d "android" ]; then
-            cd android && ./gradlew assembleDebug
-          else
-            echo "Wymuszone tworzenie struktury Android..."
-            npx cap add android
-            cd android && ./gradlew assembleDebug
-          fi
+          cd android && ./gradlew assembleDebug || (npx cap add android && cd android && ./gradlew assembleDebug)
 
       - name: Wypluj gotowy plik APK dla Szefa
         uses: actions/upload-artifact@v4
