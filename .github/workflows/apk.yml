@@ -33,7 +33,7 @@ jobs:
         run: |
           npm install @capacitor/core @capacitor/cli @capacitor/android
           rm -rf android
-          npx cap init STARK_INDUSTRIES com.stark.edith --web-dir=dist --confirm
+          yes | npx cap init STARK_INDUSTRIES com.stark.edith --web-dir=dist
           npx cap add android
 
       - name: Spawanie oficjalnego pliku APK
