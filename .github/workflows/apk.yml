@@ -3,17 +3,17 @@ on: [push, workflow_dispatch]
 
 jobs:
   build:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Pobierz kod projektu
         uses: actions/checkout@v4
 
-      - name: Zainstaluj nowoczesny Node.js v24
+      - name: Zainstaluj Node.js v20
         uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 20
 
-      - name: Konfiguracja nowoczesnej Javy v17
+      - name: Konfiguracja Javy v17
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
@@ -22,16 +22,22 @@ jobs:
       - name: Instalacja zbroi Capacitora
         run: |
           npm install
-          npm install @capacitor/core @capacitor/android
+          npm install @capacitor/core @capacitor/android @capacitor/cli
           mkdir -p dist
-          echo '<html><body>Stark Industries Engine 2026</body></html>' > dist/index.html
+          echo '<html><body>Stark Industries Engine</body></html>' > dist/index.html
           npx cap init STARK_INDUSTRIES com.stark.edith --web-dir=dist --confirm || true
           npx cap add android || true
 
       - name: Spawanie oficjalnego pliku APK
         run: |
-          npx cap sync || true
-          cd android && ./gradlew assembleDebug
+          npx cap sync android || true
+          if [ -d "android" ]; then
+            cd android && ./gradlew assembleDebug
+          else
+            echo "Brak folderu android! Tworzenie wymuszone..."
+            npx cap add android
+            cd android && ./gradlew assembleDebug
+          fi
 
       - name: Wypluj gotowy plik APK dla Szefa
         uses: actions/upload-artifact@v4
