@@ -1,0 +1,3 @@
+{ "appId": "com.starkindustries.edith", "appName": "Stark Industries", "webDir": "www",
+  "android": { "allowMixedContent": false },
+  "plugins": { "BluetoothLe": { "displayStrings": { "scanning": "Szukam STARK_EDITH_V1...", "cancel": "Anuluj", "availableDevices": "Okulary", "noDeviceFound": "Brak okularow" } } } }

@@ -1,0 +1,19 @@
+STARK INDUSTRIES - prawdziwa aplikacja na Androida (Capacitor). Bez Android Studio.
+
+=== SPOSOB 1: GITHUB (polecany, za darmo, kilka klikniec) ===
+1. Zaloz konto na github.com -> "New repository" -> nazwa STARK_INDUSTRIES -> Create.
+2. Kliknij "uploading an existing file" i przeciagnij WSZYSTKO z tego folderu
+   (razem z ukrytym folderem .github - w Windows wlacz "Pokaz ukryte elementy"). Commit.
+3. Zakladka "Actions" -> "Zbuduj STARK_INDUSTRIES.apk" sam sie uruchomi (ok. 5-8 min).
+4. Gdy pojawi sie zielony ptaszek: kliknij go -> na dole "Artifacts" -> STARK_INDUSTRIES -> pobierz.
+5. W srodku jest STARK_INDUSTRIES.apk. Wyslij na telefon, otworz, zezwol na instalacje z nieznanych zrodel.
+
+=== SPOSOB 2: VoltBuilder ===
+volt.build -> zaloz konto -> spakuj ten folder do ZIP -> wrzuc (Capacitor jest wspierany).
+
+=== Przed pierwszym uzyciem ===
+- Opublikuj strone JARVIS w Lovable (Publish) - stamtad aplikacja bierze AI.
+- W aplikacji zezwol na Bluetooth i mikrofon. Wlacz okulary -> "SPARUJ STARK_EDITH_V1" (tylko raz).
+- Dzwiek i mikrofon: modul sluchawki Bluetooth w okularach. Android sam kieruje do niego glos EDITH i Spotify.
+
+OKULARY: okulary-STARK_EDITH_V1.ino wgrywasz pozniej przez Arduino IDE (plytka AI Thinker ESP32-CAM, Partition Huge APP).

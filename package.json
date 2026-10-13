@@ -1,0 +1,16 @@
+{
+  "name": "stark-industries",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "apk": "npx cap add android || true && npx cap sync android && node fix-android.js && cd android && gradlew assembleDebug"
+  },
+  "dependencies": {
+    "@capacitor/android": "^7.0.0",
+    "@capacitor/core": "^7.0.0",
+    "@capacitor/cli": "^7.0.0",
+    "@capacitor-community/bluetooth-le": "^7.0.0",
+    "@capacitor-community/text-to-speech": "^6.0.0",
+    "@capacitor-community/speech-recognition": "^7.0.0"
+  }
+}
